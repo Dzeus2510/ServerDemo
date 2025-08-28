@@ -1,0 +1,56 @@
+package com.example.ProjectDemo.Models;
+
+import jakarta.persistence.*;
+import com.example.ProjectDemo.Models.Bill;
+import com.example.ProjectDemo.Models.Product;
+
+@Entity
+@Table(name = "billproduct")
+public class BillProduct {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "idbillproduct", nullable = false)
+    private int id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "productid", nullable = false)
+    private Product product;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "billid", nullable = false)
+    private Bill bill;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    public BillProduct() {
+    }
+
+    public BillProduct(int id, Product product, Bill bill) {
+        this.id = id;
+        this.product = product;
+        this.bill = bill;
+    }
+}
