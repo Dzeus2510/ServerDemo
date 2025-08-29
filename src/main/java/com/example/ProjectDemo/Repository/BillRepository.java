@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Integer> {
-    Bill findBillById(int id);
+    @Query("SELECT b FROM Bill b LEFT JOIN FETCH b.billProducts bp LEFT JOIN FETCH b.customer WHERE b.id = ?1")
+    Optional<Bill> findBillWithDetailsById(Integer id);
 
     @Query( "SELECT new DTO.BillWithProductCountDTO(" +
             "b.id, createdDate, packageCode, paymentCode, customer.customerName, receiveStatus, returnStatus, paymentStatus, COUNT(bp.product.id))" +

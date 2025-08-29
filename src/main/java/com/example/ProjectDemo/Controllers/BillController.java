@@ -28,7 +28,7 @@ public class BillController {
     }
 
     @GetMapping("/{id}")
-    public Bill getBillById(@PathVariable int id){
+    public Bill getBillById(@PathVariable int id) throws Exception {
         return billService.getBillById(id);
     }
 

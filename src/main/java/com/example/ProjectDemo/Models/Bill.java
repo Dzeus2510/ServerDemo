@@ -1,5 +1,6 @@
 package com.example.ProjectDemo.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.example.ProjectDemo.Models.Customer;
 
@@ -35,7 +36,8 @@ public class Bill {
     @Column(name = "paymentstatus")
     private boolean paymentStatus;
 
-    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<BillProduct> billProducts;
 
     public List<BillProduct> getBillProducts() {

@@ -1,5 +1,6 @@
 package com.example.ProjectDemo.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import com.example.ProjectDemo.Models.Bill;
 import com.example.ProjectDemo.Models.Product;
@@ -19,6 +20,7 @@ public class BillProduct {
 
     @ManyToOne
     @JoinColumn(name = "billid", nullable = false)
+    @JsonBackReference
     private Bill bill;
 
     public int getId() {

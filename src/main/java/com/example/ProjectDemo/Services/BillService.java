@@ -13,6 +13,7 @@ import com.example.ProjectDemo.Repository.CustomerRepository;
 import com.example.ProjectDemo.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,8 +37,9 @@ public class BillService {
         return billRepository.findAll();
     }
 
-    public Bill getBillById(int id){
-        return billRepository.findBillById(id);
+    public Bill getBillById(int id) throws Exception {
+        return billRepository.findBillWithDetailsById(id)
+                .orElseThrow(() -> new Exception("Bill không tồn tại với ID: " + id));
     }
 
     public Bill addBill(BillAddDTO dto) {
@@ -66,6 +68,7 @@ public class BillService {
         return billRepository.save(bill);
     }
 
+    @Transactional
     public Bill editBill(int id, BillEditDTO billDto) throws Exception {
         Optional<Bill> optionalBill = billRepository.findById(id);
         if (!optionalBill.isPresent()) {
@@ -88,19 +91,18 @@ public class BillService {
 
         if (billDto.getProductIds() != null) {
             if(existingBill.getBillProducts() != null) {
-                billProductRepository.deleteAll(existingBill.getBillProducts());
+                existingBill.getBillProducts().clear();
             }
 
-            List<BillProduct> newBillProducts = new ArrayList<>();
             for (Integer productId : billDto.getProductIds()) {
                 Product product = productRepository.findById(productId)
                         .orElseThrow(() -> new Exception("Product không tồn tại với ID: " + productId));
                 BillProduct billProduct = new BillProduct();
                 billProduct.setBill(existingBill);
                 billProduct.setProduct(product);
-                newBillProducts.add(billProduct);
+                existingBill.getBillProducts().add(billProduct);
             }
-            existingBill.setBillProducts(newBillProducts);
+
         }
         return billRepository.save(existingBill);
     }
