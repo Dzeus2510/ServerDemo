@@ -1,5 +1,7 @@
 package com.example.ProjectDemo.Controllers;
 
+import DTO.BillAddDTO;
+import DTO.BillEditDTO;
 import DTO.BillWithProductCountDTO;
 import com.example.ProjectDemo.Models.Bill;
 import com.example.ProjectDemo.Services.BillService;
@@ -31,13 +33,13 @@ public class BillController {
     }
 
     @PostMapping("")
-    public Bill addBill(Bill bill){
-        return billService.addBill(bill);
+    public Bill addBill(@RequestBody BillAddDTO billDto){
+        return billService.addBill(billDto);
     }
 
     @PutMapping("/{id}")
-    public Bill updateBill(@PathVariable int id, Bill bill){
-        return billService.editBill(id, bill);
+    public Bill updateBill(@PathVariable int id, @RequestBody BillEditDTO billDto) throws Exception {
+        return billService.editBill(id, billDto);
     }
 
     @DeleteMapping("/{id}")
@@ -46,7 +48,7 @@ public class BillController {
     }
 
     @GetMapping("/count")
-    public List<Object[]> getBillsWithCount(){
+    public List<BillWithProductCountDTO> getBillsWithCount(){
         return billService.getBillsWithCount();
     }
 

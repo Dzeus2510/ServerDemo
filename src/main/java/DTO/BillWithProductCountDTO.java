@@ -8,22 +8,22 @@ public class BillWithProductCountDTO {
     private Date createdDate;
     private String packageCode;
     private String customerName;
-    private String returnStatus;
-    private String receiveStatus;
-    private String paymentStatus;
-    private int productCount;
+    private boolean returnStatus;
+    private boolean receiveStatus;
+    private boolean paymentStatus;
+    private long productCount;
 
     public BillWithProductCountDTO() {
     }
 
-    public BillWithProductCountDTO(int id, String paymentCode, Date createdDate, String packageCode, String customerName, String returnStatus, String receiveStatus, String paymentStatus, int productCount) {
+    public BillWithProductCountDTO(int id, Date createdDate, String packageCode, String paymentCode, String customerName, boolean receiveStatus, boolean returnStatus, boolean paymentStatus, long productCount) {
         this.id = id;
-        this.paymentCode = paymentCode;
         this.createdDate = createdDate;
         this.packageCode = packageCode;
+        this.paymentCode = paymentCode;
         this.customerName = customerName;
-        this.returnStatus = returnStatus;
         this.receiveStatus = receiveStatus;
+        this.returnStatus = returnStatus;
         this.paymentStatus = paymentStatus;
         this.productCount = productCount;
     }
@@ -68,35 +68,35 @@ public class BillWithProductCountDTO {
         this.packageCode = packageCode;
     }
 
-    public String getReturnStatus() {
+    public boolean getReturnStatus() {
         return returnStatus;
     }
 
-    public void setReturnStatus(String returnStatus) {
+    public void setReturnStatus(boolean returnStatus) {
         this.returnStatus = returnStatus;
     }
 
-    public String getReceiveStatus() {
+    public boolean getReceiveStatus() {
         return receiveStatus;
     }
 
-    public void setReceiveStatus(String receiveStatus) {
+    public void setReceiveStatus(boolean receiveStatus) {
         this.receiveStatus = receiveStatus;
     }
 
-    public String getPaymentStatus() {
+    public boolean getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(boolean paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
-    public int getProductCount() {
+    public long getProductCount() {
         return productCount;
     }
 
-    public void setProductCount(int productCount) {
+    public void setProductCount(long productCount) {
         this.productCount = productCount;
     }
 }

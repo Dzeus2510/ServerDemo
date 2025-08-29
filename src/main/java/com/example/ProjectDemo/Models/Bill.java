@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import com.example.ProjectDemo.Models.Customer;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Bill {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "billid", nullable = false)
     private int id;
 
@@ -21,7 +22,7 @@ public class Bill {
     @Column(name= "packagecode", nullable = false)
     private String packageCode;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customerid", nullable = false)
     private Customer customer;
 
@@ -33,6 +34,17 @@ public class Bill {
 
     @Column(name = "paymentstatus")
     private boolean paymentStatus;
+
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    private List<BillProduct> billProducts;
+
+    public List<BillProduct> getBillProducts() {
+        return billProducts;
+    }
+
+    public void setBillProducts(List<BillProduct> billProducts) {
+        this.billProducts = billProducts;
+    }
 
     public int getId() {
         return id;

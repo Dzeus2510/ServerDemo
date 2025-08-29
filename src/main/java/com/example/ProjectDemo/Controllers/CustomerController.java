@@ -28,4 +28,9 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+    @PostMapping("")
+    public Customer addCustomer(Customer customer){
+        return customerService.addCustomer(customer);
+    }
+
 }

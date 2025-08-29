@@ -24,4 +24,8 @@ public class ProductService {
         return productRepository.findProductById(id);
     }
 
+    public List<String> getProductByBillId(int id){
+        return productRepository.findProductByBill(id);
+    }
+
 }
