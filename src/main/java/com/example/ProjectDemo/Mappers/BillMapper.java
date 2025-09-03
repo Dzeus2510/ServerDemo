@@ -1,8 +1,8 @@
-package Mappers;
+package com.example.ProjectDemo.Mappers;
 
-import DTO.BillAddDTO;
-import DTO.BillEditDTO;
-import DTO.BillWithProductCountDTO;
+import com.example.ProjectDemo.DTO.BillAddDTO;
+import com.example.ProjectDemo.DTO.BillEditDTO;
+import com.example.ProjectDemo.DTO.BillWithProductCountDTO;
 import com.example.ProjectDemo.Models.Bill;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

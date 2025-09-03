@@ -1,8 +1,8 @@
 package com.example.ProjectDemo.Services;
 
-import DTO.BillAddDTO;
-import DTO.BillEditDTO;
-import DTO.BillWithProductCountDTO;
+import com.example.ProjectDemo.DTO.BillAddDTO;
+import com.example.ProjectDemo.DTO.BillEditDTO;
+import com.example.ProjectDemo.DTO.BillWithProductCountDTO;
 import com.example.ProjectDemo.Models.Bill;
 import com.example.ProjectDemo.Models.BillProduct;
 import com.example.ProjectDemo.Models.Customer;
@@ -42,6 +42,7 @@ public class BillService {
                 .orElseThrow(() -> new Exception("Bill không tồn tại với ID: " + id));
     }
 
+    @Transactional
     public Bill addBill(BillAddDTO dto) {
         Customer customer = customerRepository.findById(dto.getCustomerId());
 
