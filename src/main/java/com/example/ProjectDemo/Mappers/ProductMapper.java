@@ -3,13 +3,11 @@ package com.example.ProjectDemo.Mappers;
 import com.example.ProjectDemo.DTO.RequestProductDTO;
 import com.example.ProjectDemo.DTO.ResponseProductDTO;
 import com.example.ProjectDemo.Models.Product;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ImageMapper.class, OptionMapper.class, VariantMapper.class})
 public interface ProductMapper {
+    @Mapping(target = "id", ignore = true)
     Product toEntity(RequestProductDTO dto);
 
     ResponseProductDTO toResponseDTO(Product product);

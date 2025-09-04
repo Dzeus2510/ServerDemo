@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ResponseProductDTO {
-    private int id;
+    private Integer id;
     private String productName;
     private String alias;
     private String vendor;

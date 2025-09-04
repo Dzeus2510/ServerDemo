@@ -3,13 +3,14 @@ package com.example.ProjectDemo.Models;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idproduct", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "productname", nullable = false)
     private String productName;
@@ -55,6 +56,15 @@ public class Product {
 
     @Column(name = "type")
     private String type;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Variant> variants;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Option> options;
 
     public Product() {
     }
@@ -187,12 +197,36 @@ public class Product {
         this.type = type;
     }
 
-    public Product(int id, String productName, String alias, String productType, String vendor, String metaTitle, String metaDescription, String summary, String templateLayout, Date publishedOn, Date createdOn, Date modifiedOn, String content, String tags, Boolean status, String type) {
+    public List<Variant> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<Variant> variants) {
+        this.variants = variants;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public Product(int id, String productName, String alias, String vendor, String productType, String metaTitle, String metaDescription, String summary, String templateLayout, Date publishedOn, Date createdOn, Date modifiedOn, String tags, String content, Boolean status, String type, List<Variant> variants, List<Image> images, List<Option> options) {
         this.id = id;
         this.productName = productName;
         this.alias = alias;
-        this.productType = productType;
         this.vendor = vendor;
+        this.productType = productType;
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.summary = summary;
@@ -200,9 +234,12 @@ public class Product {
         this.publishedOn = publishedOn;
         this.createdOn = createdOn;
         this.modifiedOn = modifiedOn;
-        this.content = content;
         this.tags = tags;
+        this.content = content;
         this.status = status;
         this.type = type;
+        this.variants = variants;
+        this.images = images;
+        this.options = options;
     }
 }

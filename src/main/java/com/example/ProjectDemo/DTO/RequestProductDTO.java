@@ -1,6 +1,7 @@
 package com.example.ProjectDemo.DTO;
 
 import java.util.Date;
+import java.util.List;
 
 public class RequestProductDTO {
     private String productName;
@@ -16,6 +17,11 @@ public class RequestProductDTO {
     private String tags;
     private Boolean status;
     private String type;
+
+    private List<ImageDTO> images;
+    private ImageDTO image;   // main image
+    private List<VariantDTO> variants;
+    private List<OptionDTO> options;
 
     public RequestProductDTO() {
     }
@@ -59,4 +65,36 @@ public class RequestProductDTO {
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
+
+    public List<ImageDTO> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageDTO> images) {
+        this.images = images;
+    }
+
+    public ImageDTO getImage() {
+        return image;
+    }
+
+    public void setImage(ImageDTO image) {
+        this.image = image;
+    }
+
+    public List<VariantDTO> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<VariantDTO> variants) {
+        this.variants = variants;
+    }
+
+    public List<OptionDTO> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<OptionDTO> options) {
+        this.options = options;
+    }
 }
