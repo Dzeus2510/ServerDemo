@@ -67,8 +67,10 @@ public class ProductService {
             dto.getVariants().forEach(varDto -> {
                 Variant variant = new Variant();
                 variant.setInventoryItemId(varDto.getInventoryItemId());
+                variant.setBarcode(varDto.getBarcode());
                 variant.setSku(varDto.getSku());
                 variant.setPrice(varDto.getPrice());
+                variant.setCompareAtPrice(varDto.getCompareAtPrice());
                 variant.setOption1(varDto.getOption1());
                 variant.setOption2(varDto.getOption2());
                 variant.setOption3(varDto.getOption3());
@@ -177,8 +179,10 @@ public class ProductService {
             dto.getVariants().forEach(varDto -> {
                 Variant variant = new Variant();
                 variant.setInventoryItemId(varDto.getInventoryItemId());
+                variant.setBarcode(varDto.getBarcode());
                 variant.setSku(varDto.getSku());
                 variant.setPrice(varDto.getPrice());
+                variant.setCompareAtPrice(varDto.getCompareAtPrice());
                 variant.setOption1(varDto.getOption1());
                 variant.setOption2(varDto.getOption2());
                 variant.setOption3(varDto.getOption3());
