@@ -25,6 +25,7 @@ public class ResponseProductDTO {
     private ImageDTO image;   // main image
     private List<VariantDTO> variants;
     private List<OptionDTO> options;
+    private List<OptionValueDTO> values;
 
     public ResponseProductDTO() {}
 
@@ -107,5 +108,17 @@ public class ResponseProductDTO {
 
     public void setOptions(List<OptionDTO> options) {
         this.options = options;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<OptionValueDTO> getValues() {
+        return values;
+    }
+
+    public void setValues(List<OptionValueDTO> values) {
+        this.values = values;
     }
 }

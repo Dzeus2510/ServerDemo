@@ -2,7 +2,6 @@ package com.example.ProjectDemo.Controllers;
 
 import com.example.ProjectDemo.DTO.RequestProductDTO;
 import com.example.ProjectDemo.DTO.ResponseProductDTO;
-import com.example.ProjectDemo.Services.BillService;
 import com.example.ProjectDemo.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

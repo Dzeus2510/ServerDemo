@@ -5,7 +5,7 @@ import com.example.ProjectDemo.DTO.ResponseProductDTO;
 import com.example.ProjectDemo.Models.Product;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = {ImageMapper.class, OptionMapper.class, VariantMapper.class})
+@Mapper(componentModel = "spring", uses = {ImageMapper.class, OptionMapper.class, VariantMapper.class, OptionValueMapper.class})
 public interface ProductMapper {
     @Mapping(target = "id", ignore = true)
     Product toEntity(RequestProductDTO dto);
