@@ -25,13 +25,11 @@ public class ResponseProductDTO {
     private ImageDTO image;   // main image
     private List<VariantDTO> variants;
     private List<OptionDTO> options;
-    private List<OptionValueDTO> values;
 
     public ResponseProductDTO() {}
 
     // Getters & Setters
     public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
 
     public String getProductName() { return productName; }
     public void setProductName(String productName) { this.productName = productName; }
@@ -112,13 +110,5 @@ public class ResponseProductDTO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<OptionValueDTO> getValues() {
-        return values;
-    }
-
-    public void setValues(List<OptionValueDTO> values) {
-        this.values = values;
     }
 }

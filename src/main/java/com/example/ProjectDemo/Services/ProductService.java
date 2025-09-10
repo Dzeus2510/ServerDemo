@@ -3,10 +3,7 @@ package com.example.ProjectDemo.Services;
 import com.example.ProjectDemo.DTO.RequestProductDTO;
 import com.example.ProjectDemo.DTO.ResponseProductDTO;
 import com.example.ProjectDemo.Mappers.ProductMapper;
-import com.example.ProjectDemo.Models.Image;
-import com.example.ProjectDemo.Models.Option;
-import com.example.ProjectDemo.Models.Product;
-import com.example.ProjectDemo.Models.Variant;
+import com.example.ProjectDemo.Models.*;
 import com.example.ProjectDemo.Repository.ImageRepository;
 import com.example.ProjectDemo.Repository.OptionRepository;
 import com.example.ProjectDemo.Repository.ProductRepository;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,7 +40,8 @@ public class ProductService {
     public ResponseProductDTO createProduct(RequestProductDTO dto) {
         // Convert DTO sang Entity
         Product product = productMapper.toEntity(dto);
-        product.setCreatedOn(new java.util.Date());
+        Date todayDate = new java.util.Date();
+        product.setCreatedOn(todayDate);
 
         if (dto.getImages() != null && !dto.getImages().isEmpty()) {
             product.setImages(new ArrayList<>());
@@ -55,8 +54,8 @@ public class ProductService {
                 img.setWidth(imgDto.getWidth());
                 img.setHeight(imgDto.getHeight());
                 img.setPosition(imgDto.getPosition());
-                img.setCreatedOn(imgDto.getCreatedOn());
-                img.setModifiedOn(imgDto.getModifiedOn());
+                img.setCreatedOn(todayDate);
+                img.setModifiedOn(todayDate);
                 img.setProduct(product);
                 product.getImages().add(img);
             });
@@ -82,8 +81,8 @@ public class ProductService {
                 variant.setWeightUnit(varDto.getWeightUnit());
                 variant.setUnit(varDto.getUnit());
                 variant.setPosition(varDto.getPosition());
-                variant.setCreatedOn(varDto.getCreatedOn());
-                variant.setModifiedOn(varDto.getModifiedOn());
+                variant.setCreatedOn(todayDate);
+                variant.setModifiedOn(todayDate);
                 variant.setTitle(varDto.getTitle());
                 variant.setGrams(varDto.getGrams());
                 variant.setType(varDto.getType());
@@ -99,6 +98,14 @@ public class ProductService {
                 Option option = new Option();
                 option.setName(optDto.getName());
                 option.setPosition(optDto.getPosition());
+                option.setCreatedOn(todayDate);
+                option.setModifiedOn(todayDate);
+                optDto.getValues().forEach(optValueDTO -> {
+                    OptionValue optVal = new OptionValue();
+                    optVal.setValue(optValueDTO.getValue());
+                    optVal.setOption(option);
+                    option.getValues().add(optVal);
+                });
                 option.setProduct(product);
                 product.getOptions().add(option);
             });
@@ -129,6 +136,8 @@ public class ProductService {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
 
+        Date todayDate = new java.util.Date();
+
         // Cập nhật các field cơ bản
         existingProduct.setProductName(dto.getProductName());
         existingProduct.setAlias(dto.getAlias());
@@ -139,7 +148,7 @@ public class ProductService {
         existingProduct.setSummary(dto.getSummary());
         existingProduct.setTemplateLayout(dto.getTemplateLayout());
         existingProduct.setPublishedOn(dto.getPublishedOn());
-        existingProduct.setModifiedOn(new java.util.Date());
+        existingProduct.setModifiedOn(todayDate);
         existingProduct.setContent(dto.getContent());
         existingProduct.setTags(dto.getTags());
         existingProduct.setStatus(dto.getStatus());
@@ -168,7 +177,7 @@ public class ProductService {
                 img.setHeight(imgDto.getHeight());
                 img.setPosition(imgDto.getPosition());
                 img.setCreatedOn(imgDto.getCreatedOn());
-                img.setModifiedOn(imgDto.getModifiedOn());
+                img.setModifiedOn(todayDate);
                 img.setProduct(existingProduct);
                 existingProduct.getImages().add(img);
             });
@@ -195,7 +204,7 @@ public class ProductService {
                 variant.setUnit(varDto.getUnit());
                 variant.setPosition(varDto.getPosition());
                 variant.setCreatedOn(varDto.getCreatedOn());
-                variant.setModifiedOn(varDto.getModifiedOn());
+                variant.setModifiedOn(todayDate);
                 variant.setTitle(varDto.getTitle());
                 variant.setGrams(varDto.getGrams());
                 variant.setType(varDto.getType());
@@ -211,6 +220,14 @@ public class ProductService {
                 Option option = new Option();
                 option.setName(optDto.getName());
                 option.setPosition(optDto.getPosition());
+                option.setCreatedOn(optDto.getCreatedOn());
+                option.setModifiedOn(todayDate);
+                optDto.getValues().forEach(optValueDTO -> {
+                    OptionValue optVal = new OptionValue();
+                    optVal.setValue(optValueDTO.getValue());
+                    optVal.setOption(option);
+                    option.getValues().add(optVal);
+                });
                 option.setProduct(existingProduct);
                 existingProduct.getOptions().add(option);
             });

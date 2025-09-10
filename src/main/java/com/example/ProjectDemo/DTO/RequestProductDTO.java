@@ -22,7 +22,6 @@ public class RequestProductDTO {
     private ImageDTO image;   // main image
     private List<VariantDTO> variants;
     private List<OptionDTO> options;
-    private List<OptionValueDTO> values;
 
     public RequestProductDTO() {
     }
@@ -99,11 +98,4 @@ public class RequestProductDTO {
         this.options = options;
     }
 
-    public List<OptionValueDTO> getValues() {
-        return values;
-    }
-
-    public void setValues(List<OptionValueDTO> values) {
-        this.values = values;
-    }
 }
